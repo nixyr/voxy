@@ -1103,24 +1103,4 @@ return SectionHandler
 end
 return TabHandler
 end
-
-local win = Voxy:Window("Voxy Library")
-local tab = win:CreateTab("Tab #1")
-local sec = tab:CreateSection("Sec #1")
-
-sec:CreateButton("Button", function()
-  print(game.Players.LocalPlayer.Name)
-end)
-sec:CreateToggle("Toggle", function(s)
-    print(s)
-end)
-sec:CreateDropdown("Dropdown", {"Shim", "Bol","k"}, function(l)
-    print(l)
-end)
-sec:CreateSlider("Slider", 0, 100, function(vals)
-  print(vals)
-end)
-sec:CreateTextBox("TextBox", "PlaceHolder", false, function(txt)
-  print(txt)
-end)
 return Voxy
