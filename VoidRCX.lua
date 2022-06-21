@@ -1,5 +1,5 @@
 local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
+local lp = Players.LocalPlayer
 local VirtualU = game:GetService('VirtualUser')
 local TwenS = game:GetService('TweenService')
 local Camera = game:GetService('Workspace').CurrentCamera
@@ -35,7 +35,6 @@ spawn(function()
   end)
 end
 
-
 --Main
 MainSec:CreateLabel("Farm")
 
@@ -49,11 +48,9 @@ MainSec:CreateToggle("Auto Click", function(click)
 
 local selectedGamePass;
 
-MainSec:CreateDropdown("Unlock Gamepass", {
-  "AutoClicker", "AutoRebirth"
-}, function(gp)
+MainSec:CreateDropdown("Unlock Gamepass", {"AutoClicker", "AutoRebirth"}, function(gp)
   for sname,sbool in next, gp do
-  for _,v in pairs(LocalPlayer.Passes.GetChildren()) do
+  for _,v in pairs(lp.Passes.GetChildren()) do
   if sname == v.Name then
   if sbool == true then
   v.Value = true
@@ -131,16 +128,16 @@ TeleportSec:CreateDropdown("Select Island", xil, function(xIsland)
 
 TeleportSec:CreateButton("Teleport To Island", function()
   if selectedArea then
-  if LocalPlayer.Character ~= nil and workspace:FindFirstChild("Scripts") and workspace.Scripts:FindFirstChild("TeleportTo") then
+  if lp.Character ~= nil and workspace:FindFirstChild("Scripts") and workspace.Scripts:FindFirstChild("TeleportTo") then
   local ttfolder = workspace.Scripts.TeleportTo
   local old_pos;
   local new_pos;
   for _,z in pairs(ttfolder:GetChildren()) do
-  if LocalPlayer.Character ~= nil and z.Name == tostring(getgenv().xIsland) and z:IsA("Part") then
--- This part copy form they module script lol path: game:GetService("Players").LocalPlayer.PlayerScripts.Library.Portals
+  if lp.Character ~= nil and z.Name == tostring(getgenv().xIsland) and z:IsA("Part") then
+-- This part copy form they module script lol path: game:GetService("Players").lp.PlayerScripts.Library.Portals
   old_pos = z.CFrame
   new_pos = old_pos * CFrame.new(0,2,0)
-  LocalPlayer.Character.PrimaryPart.CFrame = new_pos
+  lp.Character.PrimaryPart.CFrame = new_pos
   game:GetService("ReplicatedStorage").Events.WorldBoost:FireServer(z.Name)
   end
   end
@@ -156,15 +153,15 @@ TeleportSec:CreateDropdown("Select  Shop", shop, function(tpshop)
 
 TeleportSec:CreateButton("Teleport To Shop", function()
   if selectedShop then
-  if LocalPlayer.Character ~= nil and workspace:FindFirstChild("Scripts") and workspace.Scripts:FindFirstChild("Spawn") then
+  if lp.Character ~= nil and workspace:FindFirstChild("Scripts") and workspace.Scripts:FindFirstChild("Spawn") then
   local old_pos;
   local new_pos;
   local sFolder = workspace.Scripts.Spawn
   for _,v in pairs(sFolder:GetChildren()) do
-  if LocalPlayer.Character ~= nil and v:IsA("Model") and v.Name == tostring(getgenv().TPToShop) and v:FindFirstChild("Spin") ~= nil then
+  if lp.Character ~= nil and v:IsA("Model") and v.Name == tostring(getgenv().TPToShop) and v:FindFirstChild("Spin") ~= nil then
   old_pos = v["Spin"].CFrame
   new_pos = old_pos * CFrame.new(0,2,0)
-  LocalPlayer.Character.PrimaryPart.CFrame = new_pos
+  lp.Character.PrimaryPart.CFrame = new_pos
   end
   end
   end
@@ -175,7 +172,7 @@ MiscSec:CreateLabel("Others")
 
 MiscSec:CreateButton("Claim All Chest", function()
   local remote = game:GetService("ReplicatedStorage").Events.Chest
-  local ffolder = LocalPlayer.Chests
+  local ffolder = lp.Chests
   if remote and ffolder then
   for _,z in pairs(ffolder:GetChildren()) do
   if z:IsA("NumberValue") and z.Value == 0 then
@@ -186,8 +183,8 @@ MiscSec:CreateButton("Claim All Chest", function()
   end)
 
 MiscSec:CreateTextBox("Pet Storage", "Value : Number/s", false, function(xPet)
-  local maxstorage = LocalPlayer.Data.MaxStorage;
-  local petstorage = LocalPlayer.Upgrades.PetStorage;
+  local maxstorage = lp.Data.MaxStorage;
+  local petstorage = lp.Upgrades.PetStorage;
   local num = xPet
   if maxstorage and petstorage then
   maxstorage.Value = tonumber(num); petstorage.Value = tonumber(num);
@@ -195,8 +192,8 @@ MiscSec:CreateTextBox("Pet Storage", "Value : Number/s", false, function(xPet)
   end)
 
 MiscSec:CreateTextBox("Pet Equip", "Value : Number/s", false, function(xEquip)
-  local maxEq = LocalPlayer.Data.MaxEquip;
-  local petEq = LocalPlayer.Upgrades.PetEquip;
+  local maxEq = lp.Data.MaxEquip;
+  local petEq = lp.Upgrades.PetEquip;
   local num = xEquip
   if maxEq and petEq then
   maxEq.Value = tonumber(num); petEq.Value = tonumber(num);
