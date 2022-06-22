@@ -42,7 +42,7 @@ MainSec:CreateToggle("Auto Click", function(click)
   getgenv().autoClick = click
   print("Auto Click Is : "..click)
   if click then
-  doClick()
+  game:GetService("ReplicatedStorage").Events:WaitForChild("Click3")
   end
   end)
 
