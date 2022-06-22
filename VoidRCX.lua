@@ -7,7 +7,7 @@ local Mouse = Players.LocalPlayer:GetMouse()
 local identify = identifyexecutor or nil
 
 ---Library
-local VoidHUB = loadstring(game:HttpGet("https://github.com/nixyr/voxy-/raw/main/VoxyUI.lua"))()
+local VoidHUB = loadstring(game:HttpGet("https://github.com/nixyr/voxy/raw/main/VoxyUI.lua"))()
 
 local Void = VoidHUB:Window("VoidHUB "..'['..identify()..']')
 
